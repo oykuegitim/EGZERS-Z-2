@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sayı Matrisi Egzersizi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 60px);
+      grid-gap: 10px;
+      justify-content: center;
+    }
+    .cell {
+      width: 60px;
+      height: 60px;
+      background-color: white;
+      border: 2px solid #198754;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 5px;
+    }
+    .cell.correct {
+      background-color: #198754;
+      color: white;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sayı Matrisi (6x6)</h1>
+  <div class="grid" id="grid"></div>
+  <div id="message">1 sayısından başlayarak sırayla tıkla!</div>
+
+  <script>
+    let numbers = [];
+    for (let i = 1; i <= 36; i++) numbers.push(i);
+    numbers = numbers.sort(() => Math.random() - 0.5);
+
+    const grid = document.getElementById("grid");
+    let current = 1;
+
+    numbers.forEach(num => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.textContent = num;
+      cell.onclick = () => {
+        if (parseInt(cell.textContent) === current) {
+          cell.classList.add("correct");
+          current++;
+          if (current > 36) {
+            document.getElementById("message").textContent = "Tebrikler! Hepsini doğru sırayla buldun.";
+          }
+        }
+      };
+      grid.appendChild(cell);
+    });
+  </script>
+</body>
+</html>
